@@ -1,12 +1,13 @@
 import Vector from './classes/Vector.js';
 import {loadImageInCatalog} from './functions/lib.js';
 import GameObject from './classes/GameObject.js';
+import Player from './classes/Player.js';
 
 const canvas = document.getElementById(`canvas`),
   ctx = canvas.getContext(`2d`);
 
 let catalog = {},
-    myGameObject;
+    player;
 
 
 const init = () => {
@@ -22,8 +23,7 @@ const init = () => {
 
 const loaded = () => {
   console.log(`images ingeladen`);
-  myGameObject = new GameObject(canvas.width/2,canvas.height/2,catalog.player);
-  myGameObject.numFrames = 3;
+  player = new Player(canvas.width/2,500,catalog.player);
   
 
   draw();
@@ -34,8 +34,10 @@ const draw = () =>{
   ctx.fillStyle = `black`;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  myGameObject.update();
-  myGameObject.draw(ctx);
+  if(!player.killed){
+  player.update();
+  player.draw(ctx);
+  }
 
   window.requestAnimationFrame(draw);
 }
