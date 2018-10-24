@@ -9,16 +9,17 @@ export default class GameObject{
         this.frameNr = 0;
         this.localFrameNr = 0;
         this.numFrames = 1;
+        
     }
     update(){
         this.frameNr ++;
-        this.loacalFrameNr = Math.floor(this.frameNr/(60/this.framerate));
-        this.loacationFrameNr = this.localFrameNr%this.numFrames;
+        this.localFrameNr = Math.floor(this.frameNr/(60/this.frameRate));
+        this.localFrameNr = this.localFrameNr%this.numFrames;
     }
     draw(ctx){
         ctx.save();
         ctx.translate(this.location.x,this.location.y);
-        ctx.drawImage(this.image, this.loacalFrameNr + this.size,0,this.size,this.size,-this.size/2,-this.size/2,this.size,this.size);
+        ctx.drawImage(this.image, this.localFrameNr + this.size,0,this.size,this.size,-this.size/2,-this.size/2,this.size,this.size);
         ctx.restore();
     }
 }

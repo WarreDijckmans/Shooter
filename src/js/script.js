@@ -15,22 +15,28 @@ const init = () => {
     loadImageInCatalog(`img/player.png`,`player`,catalog),
     loadImageInCatalog(`img/enemy.png`,`enemy`,catalog),
     loadImageInCatalog(`img/explosion.png`,`explosion`,catalog),
-  ]).then();
+  ]).then(loaded);
 
+ 
+};
+
+const loaded = () => {
+  console.log(`images ingeladen`);
   myGameObject = new GameObject(canvas.width/2,canvas.height/2,catalog.player);
   myGameObject.numFrames = 3;
   
 
   draw();
-};
+}
 
 const draw = () =>{
+  
   ctx.fillStyle = `black`;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   myGameObject.update();
   myGameObject.draw(ctx);
-  
+
   window.requestAnimationFrame(draw);
 }
 
